@@ -1,0 +1,152 @@
+#container-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  z-index: 999;
+  background-color: #333;
+  color: #fff;
+  height: 56px;
+}
+
+#logo-container img {
+  width: 90px;
+  height: 30px;
+}
+
+#options-container {
+  display: flex;
+  width: 100%;
+  margin-left: 15%;
+  justify-content: left;
+}
+
+#options-container li:first-child a,
+#options-container li:nth-child(2) {
+  color: #fff;
+}
+
+ul {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  justify-content: space-around;
+}
+
+li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+}
+
+li:hover {
+  background-color: #555;
+}
+
+#search-container input[type="text"] {
+  border: none;
+  border-radius: 20px;
+  padding: 10px;
+  width: 300px;
+  background-color: #555;
+  color: #fff;
+}
+
+#search-container input[type="text"]:focus {
+  outline: none;
+  box-shadow: 0 0 5px #aaa;
+}
+
+li a {
+  display: block;
+  width: 60px;
+}
+
+li > ul {
+  flex-direction: column;
+}
+
+#options-container ul {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  justify-content: left;
+  align-items: center;
+}
+
+#options-container li {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+#options-container li > ul {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  display: none;
+  background-color: #555;
+  min-width: 150px;
+  left: 25px;
+}
+#options-container li > ul > li > ul {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  display: none;
+  background-color: #6d6c6c;
+  min-width: 150px;
+  max-height: 200px;
+  left: 25px;
+  overflow-y: auto;
+  
+  /* Scrollbar Styles */
+  scrollbar-width: thin;
+  scrollbar-color: #8e8e8e #d6d6d6;
+}
+
+#options-container li > ul > li > ul::-webkit-scrollbar {
+  width: 8px;
+}
+
+#options-container li > ul > li > ul::-webkit-scrollbar-track {
+  background: #d6d6d6;
+}
+
+#options-container li > ul > li > ul::-webkit-scrollbar-thumb {
+  background-color: #8e8e8e;
+  border-radius: 20px;
+  border: 3px solid #d6d6d6;
+}
+
+#options-container li > ul > li > ul::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+
+
+#options-container li:hover > ul {
+  display: block;
+}
+
+#options-container li > ul li {
+  padding: 10px;
+  white-space: nowrap;
+}
+
+#options-container li > ul li:hover {
+  background-color: #333;
+}
+
+#options-container li > ul li a {
+  color: #fff;
+  text-decoration: none;
+}
