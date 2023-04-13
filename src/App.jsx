@@ -18,7 +18,7 @@ function App() {
           <Route exact path="/" element={<Inicio />} />
           <Route path="/inicio" element={<Estrenos />} />
           <Route path="/estrenos" element={<EstrenosPage />} />
-          <Route path="/peliculas/:gender" element={<Generos />} />
+          <Route path="/generos/:gender" element={<Generos />} />
           <Route
             path="/detailmovie/:id"
             element={<DetailMovie />}

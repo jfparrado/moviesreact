@@ -68,7 +68,7 @@ function Navbar() {
                         movieGenders.map((gender) => (
                           <li key={gender.id}>
                             <a
-                              href={`/peliculas/${gender.name}`}
+                              href={`/generos/${gender.name}`}
                               className="opciones"
                             >
                               {gender.name}
