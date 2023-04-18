@@ -4,6 +4,7 @@
   left: 0;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   width: 100%;
   z-index: 999;
   background-color: #333;
@@ -12,7 +13,7 @@
 }
 
 #logo-container img {
-  width: 90px;
+  width: 50px;
   height: 30px;
 }
 
@@ -21,32 +22,19 @@
   width: 100%;
   margin-left: 15%;
   justify-content: left;
+  align-items: center;
+  position: relative;
 }
 
-#options-container li:first-child a,
-#options-container li:nth-child(2) {
+#options-container a {
   color: #fff;
-}
-
-ul {
-  display: flex;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  justify-content: space-around;
-}
-
-li {
-  padding: 10px;
+  text-decoration: none;
+  padding: 10px 10px;
+  margin-right: 10px;
   cursor: pointer;
 }
 
-a {
-  color: #fff;
-  text-decoration: none;
-}
-
-li:hover {
+#options-container a:hover {
   background-color: #555;
 }
 
@@ -64,93 +52,77 @@ li:hover {
   box-shadow: 0 0 5px #aaa;
 }
 
-li a {
-  display: block;
-  width: 60px;
-}
-
-li > ul {
+.categorias-container {
+  display: flex;
   flex-direction: column;
-}
-
-#options-container ul {
-  display: flex;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  justify-content: left;
-  align-items: center;
-}
-
-#options-container li {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-#options-container li > ul {
   position: absolute;
-  left: 0;
   top: 100%;
-  display: none;
   background-color: #555;
   min-width: 150px;
-  left: 25px;
+  left: 100px;
 }
-#options-container li > ul > li > ul {
+
+
+
+.generos {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   position: absolute;
   left: 0;
   top: 100%;
-  display: none;
   background-color: #6d6c6c;
   min-width: 150px;
   max-height: 200px;
   left: 25px;
-  overflow-y: auto;
-  
-  /* Scrollbar Styles */
+  overflow-y: scroll;
   scrollbar-width: thin;
   scrollbar-color: #8e8e8e #d6d6d6;
 }
-
-#options-container li > ul > li > ul::-webkit-scrollbar {
+.generos::-webkit-scrollbar{
   width: 8px;
 }
-
-#options-container li > ul > li > ul::-webkit-scrollbar-track {
+.generos::-webkit-scrollbar-track{
   background: #d6d6d6;
 }
-
-#options-container li > ul > li > ul::-webkit-scrollbar-thumb {
+.generos::-webkit-scrollbar-thumb{
   background-color: #8e8e8e;
   border-radius: 20px;
   border: 3px solid #d6d6d6;
 }
-
-#options-container li > ul > li > ul::-webkit-scrollbar-thumb:hover {
+.generos::-webkit-scrollbar-thumb:hover{
   background-color: #555;
 }
-
-
-
-#options-container li:hover > ul {
-  display: block;
-}
-
-#options-container li > ul li {
-  padding: 10px;
-  white-space: nowrap;
-}
-
-#options-container li > ul li:hover {
-  background-color: #333;
-}
-
-#options-container li > ul li a {
+.generos li a {
   color: #fff;
   text-decoration: none;
 }
 
+.generos li a:hover {
+  background-color: #333;
+}
+
+#firstcont{
+  display: flex;
+}
+
+.justtext{
+  padding: 10px;
+  margin: 0px;
+}
+.opcion{
+  padding: 0px 100% 0px 0px!important;
+}
+nav #options-container a:hover, nav .justtext:hover {
+  background-color: #333;
+}
+.container-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  padding: 10px;
+}
 .navbar-collapse  {
   display: flex;
   width: 100%;
@@ -171,3 +143,76 @@ li > ul {
   width: inherit;
   height: inherit;
   }
+@media only screen and (max-width: 768px) and (max-height: 1350px) {
+  .navbar-toggler {
+    display: block;
+  }
+
+  .navbar-toggler img {
+    display: block;
+    width: 30px;
+    height: 30px;
+  }
+
+  .navbar-nav {
+  display: none;
+  background-color: #333;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: max-content;
+  height: 100vh;
+  }
+
+  .column{
+  display: flex;
+  flex-direction: column-reverse;
+  width: max-content;
+  justify-content: flex-end;
+  }
+
+  .show .navbar-nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  #search-container input[type="text"] {
+    width: 200px;
+    padding: 6px;
+    margin: 10px 20px;
+  }
+
+  #options-container {
+    align-items: flex-start;
+    flex-direction: column;
+    width: 70%;
+    margin-left: 10%;
+  }
+  #secondcont .generos {
+    width: 200px;
+    height: 200px;
+  }
+  .main-item {
+    border-bottom: 1px solid white !important;
+    width: 100%;
+  }
+
+  .categorias-container {
+    display: flex;
+    background-color:inherit;
+    left: 0px;
+  }
+  .justtext {
+    font-size: 0.9rem;
+    color: #ababab !important
+  }
+  .generos {
+    background-color: inherit;
+    left: 8%;
+  }
+  .opcion {
+    font-size: 0.8rem;
+    color: #ababab !important;
+  }
+} 
