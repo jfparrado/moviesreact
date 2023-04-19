@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import { Link } from "react-router-dom";
 import { getLatestMovies } from "../../actions/movies";
 import loading from "../../assets/loading.gif";
+import TemplatePreview from "../TemplatePreview/TemplatePreview.jsx";
 
 function Estrenos (){
   const dispatch =useDispatch()
@@ -14,29 +15,7 @@ function Estrenos (){
   }, [dispatch]);
   const moviesWithPosters = latestMovies.filter((movie) => movie.poster_path);
     return (
-        <div>
-          <h2>Estrenos</h2>
-          <section className="image-section">
-
-          {moviesWithPosters.lenght!==0 ? (
-          <>
-            {
-            moviesWithPosters?.slice(0, 5).map((video)=>(
-              <div className="image-container">
-              <Link to={`/detailmovie/${video.id}`}>
-                <img src={`https://image.tmdb.org/t/p/w185/${video.poster_path}`} alt={`poster of ${video.original_title}`}/>
-                <p className="image-text">{video.original_title}</p>
-              </Link>
-            </div>
-            ))}
-          </>
-        ) : (
-          <div className="imgContainer">
-            <img src={loading} alt="loading" />
-          </div>
-          )}
-          </section>
-        </div>
+      <TemplatePreview titulo="Estrenos" movies={moviesWithPosters}/>
     )
 }
 export default Estrenos

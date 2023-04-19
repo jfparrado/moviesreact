@@ -63,7 +63,7 @@ const Navbar = () => {
               <a onClick={handleMousePeliculas} className="main-item">Peliculas</a>
               {isPeliculasExpanded && (
                 <div className="categorias-container">
-                  <p className="justtext" href="/estrenos">Estrenos</p>
+                  <a className="justtext" href="/estrenos"> Estrenos </a> 
                   <a onClick={handleMouseGeneros} className="justtext">Generos</a>
                   {isGenerosPeliculasExpanded && (
                     <div id="secondcont">
