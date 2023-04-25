@@ -1,31 +1,25 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { app } from '../../fb';
-// import { UserService } from 'src/app/services/user.service';
+import { useAuthContext } from "../../context/authContext";
 
 function Login(props) {
+  const { loginUsario } = useAuthContext();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { register, handleSubmit, formState: { errors } } = useForm();
   const navigate = useNavigate();
 
-    const crearUsario=(email,password)=>{
-        app
-        .auth()
-        .signInWithEmailAndPassword(email,password)
-        .then((usuarioFirebase)=>{
-            this.props.setUsuario(usuarioFirebase)
-            navigate(`/`)
-            console.log("sesion ad");
-        })
-    }
-
-  const onSubmit = (e) => {
+  const onSubmit = async(e) => {
     e.preventDefault();
     const email=e.target.email.value;
     const password=e.target.password.value;
-    crearUsario(email,password)
+    try {
+      await loginUsario(email,password)
+      navigate(`/`)
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   const handleGoogleLogin = () => {

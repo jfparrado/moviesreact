@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuthContext } from "../../context/authContext";
 import { app } from '../../fb';
 import "./Register.css"
 
 const Register = (props) => {
+  const { crearUsario } = useAuthContext();
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -11,21 +13,17 @@ const Register = (props) => {
 
   const navigate = useNavigate();
 
-  const crearUsario=(email,password)=>{
-    app
-    .auth()
-    .createUserWithEmailAndPassword(email,password)
-    .then((usuarioFirebase)=>{
-        props.setUsuario(usuarioFirebase)
-        navigate(`/`)
-        console.log("registrado");
-    })
-}
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
         e.preventDefault();
         const email=e.target.email.value;
         const password=e.target.password.value;
-        crearUsario(email,password)
+        try {
+          await crearUsario(email,password)
+          navigate(`/`)
+        } catch (error) {
+          console.log(error.message);
+        }
+
   };
 
   const handleChange = (e) => {

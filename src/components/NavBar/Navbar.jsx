@@ -5,9 +5,11 @@ import logoutButton from "../../assets/exit.png"
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { app } from '../../fb';
+import { useAuthContext } from "../../context/authContext";
 import "./NavBar.css"
 
 const Navbar = () => {
+  const { logOut } = useAuthContext();
   const [categories, setCategories] = useState([]);
   const [moviesByName, setMoviesByName] = useState([]);
   const [movieName, setMovieName] = useState('');
@@ -42,9 +44,14 @@ const Navbar = () => {
     const regex = /[<>]/g;
     return !regex.test(input);
   }
-  function onLogOut() {
-    app.auth().signOut();
-    navigate(`/`)
+  async function onLogOut() {
+    try {
+      await logOut()
+      navigate(`/`)
+    } catch (error) {
+      console.log(error.message);
+    }
+
   }
   
   const handleEnter = (event) => {

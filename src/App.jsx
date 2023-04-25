@@ -12,6 +12,7 @@ import NotFound from "./components/NotFound/NotFound"
 import "./App.css"
 import { app } from "./fb";
 import { useEffect, useState } from 'react';
+import { AuthContextProvider } from './context/authContext';
 
 function App() {
   const [usuario,setUsario]=useState(null)
@@ -23,29 +24,31 @@ function App() {
   },[])
   return (
     <div className='mainrouter'>
-      <Router>
-      <Navbar />
-        <Routes>
-          <Route exact path="/" element={<Inicio />} />
-          <Route path="/inicio" element={<Estrenos />} />
-          <Route path="/estrenos" element={<EstrenosPage />} />
-          <Route path="/login" element={<Login setUsario={setUsario}/>} />
-          <Route path="/register" element={<Register setUsario={setUsario}/>} />
-          <Route path="/generos/:gender" element={<Generos />} />
-          <Route
-            path="/detailmovie/:id"
-            element={<DetailMovie />}
-          />
-          <Route
-            path="/search/:movie_name"
-            element={<SearchPage />}
-          />
-          <Route
-            path="*"
-            element={<NotFound />}
-          />
-        </Routes>
-      </Router>
+      <AuthContextProvider>
+        <Router>
+        <Navbar />
+          <Routes>
+            <Route exact path="/" element={<Inicio />} />
+            <Route path="/inicio" element={<Estrenos />} />
+            <Route path="/estrenos" element={<EstrenosPage />} />
+            <Route path="/login" element={<Login setUsario={setUsario}/>} />
+            <Route path="/register" element={<Register setUsario={setUsario}/>} />
+            <Route path="/generos/:gender" element={<Generos />} />
+            <Route
+              path="/detailmovie/:id"
+              element={<DetailMovie />}
+            />
+            <Route
+              path="/search/:movie_name"
+              element={<SearchPage />}
+            />
+            <Route
+              path="*"
+              element={<NotFound />}
+            />
+          </Routes>
+        </Router>
+      </AuthContextProvider>
     </div>
 
   );
