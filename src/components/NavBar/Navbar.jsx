@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import logo from "../../assets/logo.png"
 import menuIcon from "../../assets/menu-button.png"
+import logoutButton from "../../assets/exit.png"
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { app } from '../../fb';
 import "./NavBar.css"
 
 const Navbar = () => {
@@ -36,9 +38,17 @@ const Navbar = () => {
   const handleMouseGeneros = () => {
     setIsGenerosPeliculasExpanded(!isGenerosPeliculasExpanded);
   };
-
+  function validarInput(input) {
+    const regex = /[<>]/g;
+    return !regex.test(input);
+  }
+  function onLogOut() {
+    app.auth().signOut();
+    navigate(`/`)
+  }
+  
   const handleEnter = (event) => {
-    if (event.key === 'Enter' && movieName !== '') {
+    if (event.key === 'Enter' && movieName !== '' && validarInput(inputValue)) {
       axios.get(`http://localhost:3001/search/${movieName}`)
         .then(res => {
           setMoviesByName(res.data);
@@ -88,6 +98,9 @@ const Navbar = () => {
                 onKeyUp={handleEnter}
               />
             </div>
+            <button className="navbar-logout" type="button" onClick={onLogOut}>
+              <img src={logoutButton} alt="logout button" />
+            </button>
           </div>
         </div>
       </div>
