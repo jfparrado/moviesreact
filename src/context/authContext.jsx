@@ -41,12 +41,14 @@ export function AuthContextProvider({ children }) {
   },[])
   const value = useMemo(
     () => ({
-      //este use memo es para que no se cree cada vez que se renderice. sino que guarde esto, uy solo va  acambiar si una de las dependencias cambia
+      user,
       crearUsario,
       loginUsario,
       logOut,
+      setUser,
     }),
     [
+      user,
       crearUsario,
       loginUsario,
       logOut,
