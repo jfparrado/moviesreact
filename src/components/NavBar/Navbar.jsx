@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import logo from "../../assets/logo.png"
 import menuIcon from "../../assets/menu-button.png"
 import logoutButton from "../../assets/exit.png"
+import loginButton from "../../assets/login.png"
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { app } from '../../fb';
@@ -9,7 +10,7 @@ import { useAuthContext } from "../../context/authContext";
 import "./NavBar.css"
 
 const Navbar = () => {
-  const { logOut } = useAuthContext();
+  const { logOut, user } = useAuthContext();
   const [categories, setCategories] = useState([]);
   const [moviesByName, setMoviesByName] = useState([]);
   const [movieName, setMovieName] = useState('');
@@ -52,6 +53,9 @@ const Navbar = () => {
       console.log(error.message);
     }
 
+  }
+  async function onLogIn() {
+    navigate(`/login`)
   }
   
   const handleEnter = (event) => {
@@ -105,9 +109,14 @@ const Navbar = () => {
                 onKeyUp={handleEnter}
               />
             </div>
+            {user===null?
+            <button className="navbar-logout" type="button" onClick={onLogIn}>
+              <img src={loginButton} alt="login button" />
+            </button>:
             <button className="navbar-logout" type="button" onClick={onLogOut}>
               <img src={logoutButton} alt="logout button" />
-            </button>
+            </button>}
+            
           </div>
         </div>
       </div>

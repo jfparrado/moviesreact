@@ -42,18 +42,6 @@ h2 {
     text-decoration: none;
   }
   
-
-  button{
-    background-color: #337ab7;
-    color: white;
-    padding: 10px 5px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-    margin: 0.5%;
-  }
   button[type="submit"]{
     background-color: #337ab7;
     color: white;
@@ -64,6 +52,7 @@ h2 {
     cursor: pointer;
     transition: background-color 0.2s;
     margin: 0.5%;
+    width: 240px;
   }
   button:hover {
     background-color: #23527c;

@@ -1,15 +1,22 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useAuthContext } from "../../context/authContext";
+import { GoogleButton } from "react-google-button";
+import "./Login.css";
 
 function Login(props) {
-  const { loginUsario } = useAuthContext();
+  const { loginUsario, loginGoogle, user } = useAuthContext();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { register, handleSubmit, formState: { errors } } = useForm();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (user !== null) {
+      navigate(`/`);
+    }
+  }, [user]);
   const onSubmit = async(e) => {
     e.preventDefault();
     const email=e.target.email.value;
@@ -22,17 +29,17 @@ function Login(props) {
     }
   };
 
-  const handleGoogleLogin = () => {
-    // UserService.loginWithGoogle()
-    //   .then(response => {
-    //     console.log(response);
-    //     history.push('/');
-    //   })
-    //   .catch(error=> console.log(error));
+  const handleGoogleLogin = async () => {
+    try {
+      await loginGoogle()
+      navigate(`/`)
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   return (
-    <div>
+    <div className="mainrouter principal-container">
       <h2>Inicio de sesion</h2>
       <form onSubmit={onSubmit}>
         <div>
@@ -47,7 +54,7 @@ function Login(props) {
         </div>
         <p>No tienes cuenta? <a href="/register">Registrate</a></p>
         <button type="submit">Iniciar sesion</button>
-        <button type="button" onClick={handleGoogleLogin}>Iniciar sesion con google</button>
+        <GoogleButton className="google-button" onClick={handleGoogleLogin}/>
       </form>
     </div>
   );

@@ -1,5 +1,6 @@
 //sacado de https://www.youtube.com/watch?v=ZXiJdEWVcqY&ab_channel=LatteAndCode
 import { createContext, useContext, useEffect } from "react";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { app } from "../fb";
 import PropTypes from "prop-types";
 import { useState, useMemo } from "react";
@@ -18,7 +19,6 @@ export function AuthContextProvider({ children }) {
       });
   };
   const loginUsario = (email, password) => {
-    console.log("auth:",email,password);
     app
       .auth()
       .signInWithEmailAndPassword(email, password)
@@ -26,9 +26,21 @@ export function AuthContextProvider({ children }) {
         this.props.setUsuario(usuarioFirebase);
       });
   };
+  const loginGoogle = () => {
+    const provider = new GoogleAuthProvider();
+    app.auth().signInWithPopup(provider)
+      .then((result) => {
+        const user = result.user;
+        setUser(user);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+  
   function logOut() {
     app.auth().signOut();
-    console.log("logout");
+    setUser(null)
   }
   useEffect(()=>{
     const unsubscribe = app.auth().onAuthStateChanged((currentUser)=>{
@@ -41,6 +53,7 @@ export function AuthContextProvider({ children }) {
   },[])
   const value = useMemo(
     () => ({
+      loginGoogle,
       user,
       crearUsario,
       loginUsario,
@@ -48,6 +61,7 @@ export function AuthContextProvider({ children }) {
       setUser,
     }),
     [
+      loginGoogle,
       user,
       crearUsario,
       loginUsario,
