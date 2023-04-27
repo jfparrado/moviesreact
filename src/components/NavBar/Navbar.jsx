@@ -55,7 +55,7 @@ const Navbar = () => {
   }
   
   const handleEnter = (event) => {
-    if (event.key === 'Enter' && movieName !== '' && validarInput(inputValue)) {
+    if (event.key === 'Enter' && movieName !== '' && validarInput(movieName)) {
       axios.get(`http://localhost:3001/search/${movieName}`)
         .then(res => {
           setMoviesByName(res.data);

@@ -14,7 +14,7 @@ function TemplateMany(props) {
   }, [movies]);
 
   return (
-    <div className="mainrouter">
+    <div className="mainrouter principal-container">
       <br />
       <h2>{titulo}</h2>
       {movies.length !== 0 ? (

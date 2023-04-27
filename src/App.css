@@ -1,6 +1,7 @@
 .mainrouter {
-height: 100vh;
-  }
+  min-height: 100vh;
+  max-height: fit-content;
+}
   #noResults{
     font-size: 3rem;
     color: white;

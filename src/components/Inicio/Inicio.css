@@ -26,6 +26,9 @@
   .mainimage{
     justify-self: center;
   }
+  .principal-container{
+    background-color: #384047;
+  }
   
 section {
   margin-left: 5%;

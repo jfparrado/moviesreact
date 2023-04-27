@@ -13,6 +13,7 @@ import "./App.css"
 import { app } from "./fb";
 import { useEffect, useState } from 'react';
 import { AuthContextProvider } from './context/authContext';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 
 function App() {
   const [usuario,setUsario]=useState(null)
@@ -30,17 +31,17 @@ function App() {
           <Routes>
             <Route exact path="/" element={<Inicio />} />
             <Route path="/inicio" element={<Estrenos />} />
-            <Route path="/estrenos" element={<EstrenosPage />} />
             <Route path="/login" element={<Login setUsario={setUsario}/>} />
             <Route path="/register" element={<Register setUsario={setUsario}/>} />
-            <Route path="/generos/:gender" element={<Generos />} />
+            <Route path="/estrenos" element={<ProtectedRoute><EstrenosPage /></ProtectedRoute>} />
+            <Route path="/generos/:gender" element={<ProtectedRoute><Generos /></ProtectedRoute>} />
             <Route
               path="/detailmovie/:id"
-              element={<DetailMovie />}
+              element={<ProtectedRoute><DetailMovie /></ProtectedRoute>}
             />
             <Route
               path="/search/:movie_name"
-              element={<SearchPage />}
+              element={<ProtectedRoute><SearchPage /></ProtectedRoute>}
             />
             <Route
               path="*"

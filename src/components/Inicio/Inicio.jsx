@@ -6,7 +6,7 @@ import loading from "../../assets/loading.gif";
 import "./Inicio.css"
 function Inicio (){
     return (
-    <div>
+    <div className="principal-container">
       <div className="banner-container">
         <br />
         <img className="mainimage" src={banner} alt="Banner Photo"/>
