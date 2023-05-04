@@ -1,8 +1,6 @@
 import React , {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import { Link } from "react-router-dom";
-import { getLatestMovies } from "../../actions/movies";
-import loading from "../../assets/loading.gif";
+import { getLatestMoviesPreview } from "../../actions/movies";
 import TemplatePreview from "../TemplatePreview/TemplatePreview.jsx";
 
 function Estrenos (){
@@ -10,7 +8,7 @@ function Estrenos (){
   const latestMovies =  useSelector((state)=>state?.latestMovies)
   useEffect(() => {
     if (latestMovies.length===0) {
-      dispatch(getLatestMovies());
+      dispatch(getLatestMoviesPreview());
     }
   }, [dispatch]);
   const moviesWithPosters = latestMovies.filter((movie) => movie.poster_path);

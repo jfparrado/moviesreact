@@ -11,7 +11,7 @@ export const AuthContext = createContext(); //es un objeto que adentro tiene un 
 export function AuthContextProvider({ children }) {
   const [user,setUser]=useState({})
   const cookies = new Cookies(); 
-  
+  const expirationSeconds=60;
   const setCookies = (userCredential) => {
     const user = userCredential.user;
     user.getIdToken().then((token) => {
@@ -33,7 +33,7 @@ export function AuthContextProvider({ children }) {
     if (expirationDate < new Date()) { // compara la fecha de expiración con la fecha actual
       firebase.auth().currentUser.getIdToken(true)
         .then((newToken) => {
-          setCookie('jwt', newToken); // actualiza la cookie con el nuevo token
+          cookies.set('jwt', newToken, { path: '/', expires:1 });
         })
         .catch((error) => {
           console.error(error);

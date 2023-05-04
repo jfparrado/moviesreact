@@ -9,6 +9,8 @@ export const GET_SEARCH_RESULT = `GET_SEARCH_RESULT`;
 import Cookies from "universal-cookie";
 
 const cookies = new Cookies();
+const basicUrl = "http://localhost:3001/";
+
 export const getHeaders = () => {
   const jwt = cookies.get("jwt");
   const headers = {
@@ -33,7 +35,7 @@ export function getAllMovies() {
 export function getTopRanked() {
   return async function (dispatch) {
     try {
-      const topMovies = await axios.get(`http://localhost:3001/topranked`);
+      const topMovies = await axios.get(`${basicUrl}topranked`);
       return dispatch({
         type: GET_TOP_RANKED,
         payload: topMovies.data,
@@ -46,7 +48,7 @@ export function getTopRanked() {
 export function getMovieGenders() {
   return async function (dispatch) {
     try {
-      const genders = await axios.get(`http://localhost:3001/moviegenders`);
+      const genders = await axios.get(`${basicUrl}moviegenders`);
       return dispatch({
         type: GET_MOVIE_GENDERS,
         payload: genders.data,
@@ -60,10 +62,25 @@ export function getLatestMovies() {
   const headers = getHeaders();
   return async function (dispatch) {
     try {
-      const latestMovies = await axios.get(
-        `http://localhost:3001/latestmovies`,
-        { headers }
-      );
+      const latestMovies = await axios.get(`${basicUrl}latestmovies`, {
+        headers,
+      });
+      return dispatch({
+        type: GET_LATEST_MOVIES,
+        payload: latestMovies.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+export function getLatestMoviesPreview() {
+  const headers = getHeaders();
+  return async function (dispatch) {
+    try {
+      const latestMovies = await axios.get(`${basicUrl}latestmoviespreview`, {
+        headers,
+      });
       return dispatch({
         type: GET_LATEST_MOVIES,
         payload: latestMovies.data,
@@ -78,7 +95,7 @@ export function getDetailedMovie(movie_id) {
   return async function (dispatch) {
     try {
       const detailMovie = await axios.get(
-        `http://localhost:3001/detailmovie/${movie_id}`,
+        `${basicUrl}detailmovie/${movie_id}`,
         { headers }
       );
       return dispatch({
@@ -95,7 +112,7 @@ export function getMoviesByGender(gender) {
   return async function (dispatch) {
     try {
       const moviesByGender = await axios.get(
-        `http://localhost:3001/moviesbygender/${gender}`,
+        `${basicUrl}moviesbygender/${gender}`,
         { headers }
       );
       return dispatch({
@@ -111,10 +128,9 @@ export function getMoviesByName(movie_name) {
   const headers = getHeaders();
   return async function (dispatch) {
     try {
-      const moviesByName = await axios.get(
-        `http://localhost:3001/search/${movie_name}`,
-        { headers }
-      );
+      const moviesByName = await axios.get(`${basicUrl}search/${movie_name}`, {
+        headers,
+      });
       return dispatch({
         type: GET_SEARCH_RESULT,
         payload: moviesByName.data,
