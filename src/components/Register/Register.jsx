@@ -34,19 +34,21 @@ const Register = (props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Registro de usuarios</h2>
-      <div>
-        <label htmlFor="email">Email:</label>
-        <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required />
-      </div>
-      <div>
-        <label htmlFor="password">Contraseña:</label>
-        <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} required />
-      </div>
-      <p>Ya tienes cuenta? <a href="/login">Logeate</a></p>
-      <button type="submit">Registrar</button>
-    </form>
+    <div className="mainrouter principal-container">
+      <h2 className='titulologin'>Registro de usuarios</h2>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="email">Email:</label>
+          <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required />
+        </div>
+        <div>
+          <label htmlFor="password">Contraseña:</label>
+          <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} required />
+        </div>
+        <p className='simple_paragraph'>Ya tienes cuenta? <a href="/login">Logeate</a></p>
+        <button type="submit">Registrar</button>
+      </form>
+    </div>
   );
 };
 export default Register 

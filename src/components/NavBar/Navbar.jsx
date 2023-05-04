@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { app } from '../../fb';
 import { useAuthContext } from "../../context/authContext";
+import { getHeaders } from "../../actions/movies";
 import "./NavBar.css"
 
 const Navbar = () => {
@@ -60,7 +61,9 @@ const Navbar = () => {
   
   const handleEnter = (event) => {
     if (event.key === 'Enter' && movieName !== '' && validarInput(movieName)) {
-      axios.get(`http://localhost:3001/search/${movieName}`)
+    const headers = getHeaders();
+      axios.get(`http://localhost:3001/search/${movieName}`,
+      { headers })
         .then(res => {
           setMoviesByName(res.data);
           navigate(`/search/${movieName}`);
@@ -116,7 +119,6 @@ const Navbar = () => {
             <button className="navbar-logout" type="button" onClick={onLogOut}>
               <img src={logoutButton} alt="logout button" />
             </button>}
-            
           </div>
         </div>
       </div>

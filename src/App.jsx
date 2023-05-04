@@ -21,7 +21,6 @@ function App() {
     app.auth().onAuthStateChanged((usuarioFirebase)=>{
       setUsario(usuarioFirebase)
     })
-    console.log("usuario conectado: ",usuario);
   },[])
   return (
     <div className='mainrouter'>

@@ -6,6 +6,16 @@ export const GET_DETAIL_MOVIE = `GET_DETAIL_MOVIE`;
 export const GET_MOVIE_GENDERS = `GET_MOVIE_GENDERS`;
 export const GET_MOVIES_BY_GENDER = `GET_MOVIES_BY_GENDER`;
 export const GET_SEARCH_RESULT = `GET_SEARCH_RESULT`;
+import Cookies from "universal-cookie";
+
+const cookies = new Cookies();
+export const getHeaders = () => {
+  const jwt = cookies.get("jwt");
+  const headers = {
+    Authorization: `${jwt}`,
+  };
+  return headers;
+};
 
 export function getAllMovies() {
   return async function (dispatch) {
@@ -47,10 +57,12 @@ export function getMovieGenders() {
   };
 }
 export function getLatestMovies() {
+  const headers = getHeaders();
   return async function (dispatch) {
     try {
       const latestMovies = await axios.get(
-        `http://localhost:3001/latestmovies`
+        `http://localhost:3001/latestmovies`,
+        { headers }
       );
       return dispatch({
         type: GET_LATEST_MOVIES,
@@ -62,10 +74,12 @@ export function getLatestMovies() {
   };
 }
 export function getDetailedMovie(movie_id) {
+  const headers = getHeaders();
   return async function (dispatch) {
     try {
       const detailMovie = await axios.get(
-        `http://localhost:3001/detailmovie/${movie_id}`
+        `http://localhost:3001/detailmovie/${movie_id}`,
+        { headers }
       );
       return dispatch({
         type: GET_DETAIL_MOVIE,
@@ -77,10 +91,12 @@ export function getDetailedMovie(movie_id) {
   };
 }
 export function getMoviesByGender(gender) {
+  const headers = getHeaders();
   return async function (dispatch) {
     try {
       const moviesByGender = await axios.get(
-        `http://localhost:3001/moviesbygender/${gender}`
+        `http://localhost:3001/moviesbygender/${gender}`,
+        { headers }
       );
       return dispatch({
         type: GET_MOVIES_BY_GENDER,
@@ -92,10 +108,12 @@ export function getMoviesByGender(gender) {
   };
 }
 export function getMoviesByName(movie_name) {
+  const headers = getHeaders();
   return async function (dispatch) {
     try {
       const moviesByName = await axios.get(
-        `http://localhost:3001/search/${movie_name}`
+        `http://localhost:3001/search/${movie_name}`,
+        { headers }
       );
       return dispatch({
         type: GET_SEARCH_RESULT,

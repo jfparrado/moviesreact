@@ -3,14 +3,17 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useAuthContext } from "../../context/authContext";
 import { GoogleButton } from "react-google-button";
-import "./Login.css";
+import Cookies from 'universal-cookie';
+
 
 function Login(props) {
-  const { loginUsario, loginGoogle, user } = useAuthContext();
+  const { loginUsuario, loginGoogle, user } = useAuthContext();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { register, handleSubmit, formState: { errors } } = useForm();
   const navigate = useNavigate();
+  const cookies = new Cookies();
+
 
   useEffect(() => {
     if (user !== null) {
@@ -22,7 +25,8 @@ function Login(props) {
     const email=e.target.email.value;
     const password=e.target.password.value;
     try {
-      await loginUsario(email,password)
+      const token = await loginUsuario(email,password);
+      cookies.set('jwt', token, { path: '/' });
       navigate(`/`)
     } catch (error) {
       console.log(error.message);
@@ -40,7 +44,7 @@ function Login(props) {
 
   return (
     <div className="mainrouter principal-container">
-      <h2>Inicio de sesion</h2>
+      <h2 className='titulologin'>Inicio de sesion</h2>
       <form onSubmit={onSubmit}>
         <div>
           <label htmlFor="email">Email:</label>
@@ -52,7 +56,7 @@ function Login(props) {
           <input type="password" id="password" name="password" {...register('password', { required: true, minLength: 6 })} onChange={e => setPassword(e.target.value)} required />
           {errors.password && <span>This field is required and must have at least 6 characters</span>}
         </div>
-        <p>No tienes cuenta? <a href="/register">Registrate</a></p>
+        <p className='simple_paragraph'>No tienes cuenta? <a href="/register">Registrate</a></p>
         <button type="submit">Iniciar sesion</button>
         <GoogleButton className="google-button" onClick={handleGoogleLogin}/>
       </form>

@@ -1,6 +1,13 @@
-h2 {
+.titulologin{
     text-align: center;
+    margin-left:none !important;
+    display: flex;
+    justify-content: center;
+    margin-right: 5%;
   }
+.simple_paragraph, .titulologin, label{
+  color:white
+}
   
   form {
     display: flex;
