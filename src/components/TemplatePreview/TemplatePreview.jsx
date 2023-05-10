@@ -13,7 +13,7 @@ function TemplatePreview (props){
           <>
             {
             movies?.slice(0, 5).map((video)=>(
-              <div className="image-container">
+              <div className="image-container" key={video.id}>
               <Link to={`/detailmovie/${video.id}`}>
                 <img src={`https://image.tmdb.org/t/p/w185/${video.poster_path}`} alt={`poster of ${video.original_title}`}/>
                 <p className="image-text">{video.original_title}</p>
@@ -31,4 +31,3 @@ function TemplatePreview (props){
     )
 }
 export default TemplatePreview
-

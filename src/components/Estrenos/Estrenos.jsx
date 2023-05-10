@@ -17,4 +17,3 @@ function Estrenos (){
     )
 }
 export default Estrenos
-
